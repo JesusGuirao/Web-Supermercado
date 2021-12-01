@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+  <title>Ejercicios Javascript</title>
+  <meta charset="UTF-8" />
+  <link rel="stylesheet" href="estilos.css" />
+</head>
+
+<body>
+  <h1 id="titulo">SUPERMERCADO</h1>
+  <input type="text" id="regex" placeholder="cajaXXX: [+,-]XXX" value="caja1: +1" />
+  <button type="submit" id="botonguardar"><b>Guardar estado</b></button>
+  <button type="submit" id="botoncargar"><b>Cargar estado</b></button>
+  <button type="submit" id="botonimagenes"><b>Ir a documentación</b></button>
+  <div id="zonacajas"></div>
+
+
+  <div id="divofoto">
+    <picture id="portaFoto">
+      <source media="(orientation: landscape) and (min-width: 1920px)" srcset="./imagenes/fondowebbien.heic"
+        type="image/heic">
+
+      <source media="(orientation: landscape) and (min-width: 1200px)" srcset="./imagenes/fondowebbien.jpg"
+        type="image/jpg">
+
+      <source media="(orientation: landscape) and (min-width: 901px)" srcset="./imagenes/fondoweb2.webp"
+        type="image/webp">
+
+      <img id="laFoto" alt="Foto de fondo" title="Un paisaje conocido" src="./imagenes/fondowebbien.jpg" />
+    </picture>
+  </div>
+
+  <script src="index.js"></script>
+
+
+</body>
+
+</html>
