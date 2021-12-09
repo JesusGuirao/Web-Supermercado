@@ -1,7 +1,7 @@
 // poner el código para la solución aquí
 // caja.ref.cartel.className = caja.ref.cartel.className.replace(' giro', '')
 
-let cajas = []
+let cajas = [];
 const nombres = [
   'María',
   'Alba',
@@ -23,174 +23,174 @@ const nombres = [
   'Martina',
   'Valeria',
   'Leo',
-]
+];
 
 const saveToLocalStorage = () => {
-  let cajasToLocalStorage = []
-  cajas.forEach(caja => {
-    ;({ abierta, horaInicio, cola } = caja)
-    cajasToLocalStorage.push({ abierta, horaInicio, cola })
-  })
-  localStorage.setItem('cajas', JSON.stringify(cajasToLocalStorage))
-}
+  let cajasToLocalStorage = [];
+  cajas.forEach((caja) => {
+    ({ abierta, horaInicio, cola } = caja);
+    cajasToLocalStorage.push({ abierta, horaInicio, cola });
+  });
+  localStorage.setItem('cajas', JSON.stringify(cajasToLocalStorage));
+};
 
 const gestorCola = (añadir, caja, cantidad = 1) => {
   if (añadir) {
     for (let index = 0; index < cantidad; index++) {
-      caja.cola.push(nombres[Math.floor(Math.random() * nombres.length)])
+      caja.cola.push(nombres[Math.floor(Math.random() * nombres.length)]);
     }
   } else {
     for (let index = 0; index < cantidad; index++) {
-      caja.cola.shift()
+      caja.cola.shift();
     }
   }
-  pintarNombresCola(caja)
-}
+  pintarNombresCola(caja);
+};
 
-const pintarNombresCola = caja => {
-  const colaTexto = caja.ref.colaTexto
-  colaTexto.innerHTML = ''
-  caja.cola.forEach(e => {
-    const textoCola = document.createElement('li')
-    textoCola.appendChild(document.createTextNode(e))
-    colaTexto.appendChild(textoCola)
-  })
-}
+const pintarNombresCola = (caja) => {
+  const colaTexto = caja.ref.colaTexto;
+  colaTexto.innerHTML = '';
+  caja.cola.forEach((e) => {
+    const textoCola = document.createElement('li');
+    textoCola.appendChild(document.createTextNode(e));
+    colaTexto.appendChild(textoCola);
+  });
+};
 
 const seCabeEnLaCola = (caja, cantidad) => {
   if (caja.cola.length + cantidad <= 4 && caja.cola.length + cantidad >= 0) {
-    return false
+    return false;
   } else {
-    return true
+    return true;
   }
-}
+};
 
 const regex = () => {
-  const regex = /(caja)[0-9]+(: [+,-])[0-9]+/g
-  const regexNumeros = /[0-9]+/g
-  const regexMasOMenos = /[+,-]/g
-  const texto = document.getElementById('regex').value
+  const regex = /(caja)[0-9]+(: [+,-])[0-9]+/g;
+  const regexNumeros = /[0-9]+/g;
+  const regexMasOMenos = /[+,-]/g;
+  const texto = document.getElementById('regex').value;
   if (texto.match(regex) === null) {
-    console.log('La expresión esta mal escrita')
-    return
+    console.log('La expresión esta mal escrita');
+    return;
   }
-  ;[cajaNumero, cantidad] = texto.match(regexNumeros)
+  [cajaNumero, cantidad] = texto.match(regexNumeros);
   if (cajaNumero <= 0 || cajaNumero > cajas.length) {
-    console.log('La caja seleccionada no existe')
-    return
+    console.log('La caja seleccionada no existe');
+    return;
   }
-  const simbolo = texto.match(regexMasOMenos)
-  const esMas = simbolo[0] === '+'
-  const caja = cajas[cajaNumero - 1]
+  const simbolo = texto.match(regexMasOMenos);
+  const esMas = simbolo[0] === '+';
+  const caja = cajas[cajaNumero - 1];
 
   if (caja.abierta === false) {
-    console.log('La caja esta cerrada')
-    return
+    console.log('La caja esta cerrada');
+    return;
   }
 
-  const numeroModificar = simbolo[0] + cantidad
+  const numeroModificar = simbolo[0] + cantidad;
   if (seCabeEnLaCola(caja, +numeroModificar)) {
-    console.log('la operación deseada no se puede realizar')
+    console.log('la operación deseada no se puede realizar');
     if (seCabeEnLaCola(caja, 1)) {
-      alert('La cola esta llena')
-      return
+      alert('La cola esta llena');
+      return;
     }
 
-    return
+    return;
   }
 
-  gestorCola(esMas, caja, cantidad)
+  gestorCola(esMas, caja, cantidad);
 
   if (caja.cola.length === 4) {
-    const horaFin = new Date()
-    const horaInicio = new Date(caja.horaInicio)
-    const tiempoTranscurrido = Math.trunc((horaFin - horaInicio) / 1000)
-    alert(`La cola se a llenado en ${tiempoTranscurrido} segundos`)
+    const horaFin = new Date();
+    const horaInicio = new Date(caja.horaInicio);
+    const tiempoTranscurrido = Math.trunc((horaFin - horaInicio) / 1000);
+    alert(`La cola se a llenado en ${tiempoTranscurrido} segundos`);
   }
-}
+};
 
-const click = numeroCaja => {
-  const caja = cajas[numeroCaja]
+const click = (numeroCaja) => {
+  const caja = cajas[numeroCaja];
   if (!caja.abierta) {
-    caja.ref.cartel.className = caja.ref.cartel.className + ' giro'
-    caja.abierta = true
-    caja.horaInicio = new Date()
-    return
+    caja.ref.cartel.className = caja.ref.cartel.className + ' giro';
+    caja.abierta = true;
+    caja.horaInicio = new Date();
+    return;
   }
   if (seCabeEnLaCola(caja, 1)) {
-    alert('La cola esta llena')
-    return
+    alert('La cola esta llena');
+    return;
   }
 
-  gestorCola(true, caja, 1)
+  gestorCola(true, caja, 1);
 
   if (caja.cola.length === 4) {
-    const horaFin = new Date()
-    const horaInicio = new Date(caja.horaInicio)
-    const tiempoTranscurrido = Math.trunc((horaFin - horaInicio) / 1000)
+    const horaFin = new Date();
+    const horaInicio = new Date(caja.horaInicio);
+    const tiempoTranscurrido = Math.trunc((horaFin - horaInicio) / 1000);
 
-    alert(`La cola se a llenado en ${tiempoTranscurrido} segundos`)
+    alert(`La cola se a llenado en ${tiempoTranscurrido} segundos`);
   }
-}
+};
 
-const clickDerecho = numeroCaja => {
-  const caja = cajas[numeroCaja]
-  if (!caja.abierta) return
+const clickDerecho = (numeroCaja) => {
+  const caja = cajas[numeroCaja];
+  if (!caja.abierta) return;
 
   if (caja.cola.length === 0) {
-    caja.ref.cartel.className = caja.ref.cartel.className.replace(' giro', '')
-    caja.abierta = false
-    caja.cola = []
-    caja.horaInicio = null
-    return
+    caja.ref.cartel.className = caja.ref.cartel.className.replace(' giro', '');
+    caja.abierta = false;
+    caja.cola = [];
+    caja.horaInicio = null;
+    return;
   }
 
-  gestorCola(false, caja, 1)
-}
+  gestorCola(false, caja, 1);
+};
 
 const crearCajas = (cajasLocalStorage, cantidad = 5) => {
-  const zonaCajas = document.getElementById('zonacajas')
+  const zonaCajas = document.getElementById('zonacajas');
 
   for (let index = 0; index < cantidad; index++) {
-    const caja = document.createElement('div')
+    const caja = document.createElement('div');
     // Creamos un p
-    const p = document.createElement('p')
+    const p = document.createElement('p');
     // Creamos el texto del p
-    const textoP = document.createTextNode(`caja${index + 1}`)
+    const textoP = document.createTextNode(`caja${index + 1}`);
     // Añadimos el texto al p
-    p.appendChild(textoP)
+    p.appendChild(textoP);
     // Añadimos al div el p
-    caja.appendChild(p)
+    caja.appendChild(p);
     // Añadir cartel
 
-    const contenedorCartel = document.createElement('div')
-    contenedorCartel.className = 'contenedorCartel'
+    const contenedorCartel = document.createElement('div');
+    contenedorCartel.className = 'contenedorCartel';
 
-    const cartel = document.createElement('div')
-    cartel.className = 'cartel'
+    const cartel = document.createElement('div');
+    cartel.className = 'cartel';
 
-    const cartelAbierto = document.createElement('div')
-    cartelAbierto.className = 'cajaCerrada'
-    const cartelCerrrado = document.createElement('div')
-    cartelCerrrado.className = 'cajaAbierta'
+    const cartelAbierto = document.createElement('div');
+    cartelAbierto.className = 'cajaCerrada';
+    const cartelCerrrado = document.createElement('div');
+    cartelCerrrado.className = 'cajaAbierta';
 
-    cartel.appendChild(cartelAbierto)
-    cartel.appendChild(cartelCerrrado)
+    cartel.appendChild(cartelAbierto);
+    cartel.appendChild(cartelCerrrado);
 
-    contenedorCartel.appendChild(cartel)
+    contenedorCartel.appendChild(cartel);
 
-    caja.appendChild(contenedorCartel)
+    caja.appendChild(contenedorCartel);
 
-    caja.className = 'caja'
+    caja.className = 'caja';
 
-    zonaCajas.appendChild(caja)
+    zonaCajas.appendChild(caja);
 
-    const centerTexto = document.createElement('center')
-    const colaTexto = document.createElement('ul')
-    colaTexto.className = 'colaTexto'
+    const centerTexto = document.createElement('center');
+    const colaTexto = document.createElement('ul');
+    colaTexto.className = 'colaTexto';
 
-    centerTexto.appendChild(colaTexto)
-    caja.appendChild(centerTexto)
+    centerTexto.appendChild(colaTexto);
+    caja.appendChild(centerTexto);
 
     if (cajasLocalStorage !== null) {
       const objCaja = {
@@ -202,11 +202,11 @@ const crearCajas = (cajasLocalStorage, cantidad = 5) => {
           cartel,
           colaTexto,
         },
-      }
-      cajas.push(objCaja)
-      pintarNombresCola(objCaja)
+      };
+      cajas.push(objCaja);
+      pintarNombresCola(objCaja);
       if (objCaja.abierta) {
-        objCaja.ref.cartel.className = objCaja.ref.cartel.className + ' giro'
+        objCaja.ref.cartel.className = objCaja.ref.cartel.className + ' giro';
       }
     } else {
       const objCaja = {
@@ -218,28 +218,41 @@ const crearCajas = (cajasLocalStorage, cantidad = 5) => {
           cartel,
           colaTexto,
         },
-      }
-      cajas.push(objCaja)
+      };
+      cajas.push(objCaja);
     }
 
     caja.addEventListener('click', () => {
-      click(index)
-    })
-    caja.addEventListener('contextmenu', e => {
-      e.preventDefault()
-      clickDerecho(index)
-    })
+      click(index);
+    });
+    caja.addEventListener('contextmenu', (e) => {
+      e.preventDefault();
+      clickDerecho(index);
+    });
   }
-}
+};
 
-const cajasLocalStorage = JSON.parse(localStorage.getItem('cajas'))
-crearCajas(cajasLocalStorage || null)
+const cajasLocalStorage = JSON.parse(localStorage.getItem('cajas'));
+crearCajas(cajasLocalStorage || null);
 
-document.getElementById('regex').addEventListener('keydown', e => {
+document.getElementById('regex').addEventListener('keydown', (e) => {
   if (e.key === 'Enter') {
-    regex()
+    regex();
   }
-})
-document.getElementById('botonguardar').addEventListener('click', e => {
-  saveToLocalStorage()
-})
+});
+document.getElementById('botonguardar').addEventListener('click', (e) => {
+  saveToLocalStorage();
+});
+
+//Ocultar Fondo
+
+$('#botonvisible').click(function (e) {
+  // Resetear, por si acaso has estado jugando con la otra propiedad
+  $('#divofoto').css('display', 'block');
+
+  if ($('#divofoto').css('visibility') != 'hidden') {
+    $('#divofoto').css('visibility', 'hidden');
+  } else {
+    $('#divofoto').css('visibility', 'visible');
+  }
+});
