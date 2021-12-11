@@ -244,15 +244,26 @@ document.getElementById('botonguardar').addEventListener('click', (e) => {
   saveToLocalStorage();
 });
 
-//Ocultar Fondo
+//Modo noche
+let noche = document.querySelector('#fondoid'); // cambiar atributos HTML / CSS
+var style_noche = window.getComputedStyle(noche); // obtener atributos CSS
+var rutaImagenFondoOriginal = style_noche.getPropertyValue('background-image');
 
-$('#botonvisible').click(function (e) {
-  // Resetear, por si acaso has estado jugando con la otra propiedad
-  $('#divofoto').css('display', 'block');
+//ocultar fondo
+function ocultarfondo() {
+  let ocultar = document.getElementById('fondoid'); // cambiar atributos HTML / CSS
 
-  if ($('#divofoto').css('visibility') != 'hidden') {
-    $('#divofoto').css('visibility', 'hidden');
+  var style_ocultar = window.getComputedStyle(ocultar); // obtener atributos CSS
+
+  console.log(style_ocultar.getPropertyValue('background-image'));
+
+  if (
+    style_ocultar.getPropertyValue('background-image') ==
+    rutaImagenFondoOriginal
+  ) {
+    let ocultar = document.getElementById('fondoid'); // cambiar atributos HTML / CSS
+    ocultar.style.backgroundImage = 'url(./imagenes/fonditoblanco.jpg)';
   } else {
-    $('#divofoto').css('visibility', 'visible');
+    ocultar.style.backgroundImage = 'url(./imagenes/fondowebbien.jpg)';
   }
-});
+}
