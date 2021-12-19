@@ -4,28 +4,68 @@
 <head>
   <title>Ejercicios Javascript</title>
   <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link rel="stylesheet" href="estilos.css" />
+  <link rel="stylesheet" href="normalize.css">
 </head>
 
-<body id="fondoid">
-  <h1 id="titulo">SUPERMERCADO</h1>
-  <input type="text" id="regex" placeholder="cajaXXX: [+,-]XXX" value="caja1: +1" />
-  <button type="submit" id="botonguardar"><b>Guardar estado</b></button>
-  <a href=https://jesusguirao.github.io/Web-Supermercado/Documentacionsupermercadojesusguiraomelero.pdf
-    target=_blank><button id="botonimagenes">Ir a documentacion</button></a>
-  <button id="botonvisible" onclick="ocultarfondo()">Ocultar Fondo</button>
-  <button type="submit" id="botonnoche" onclick="oscuridad.hacernoche()"><b>🌙</b></button>
-  <button type="submit" id="botondia" onclick="oscuridad.hacerdia()"><b>☀</b></button>
+<body id="body">
+
+  <nav class="navbar">
+    <div class="brand-title">Supermercado El Oasis</div>
+    <a href="#" class="toggle-button">
+      <span class="bar"></span>
+      <span class="bar"></span>
+      <span class="bar"></span>
+    </a>
+    <div class="navbar-links">
+      <ul>
+        <li><a href=https://jesusguirao.github.io/Web-Supermercado/Documentacionsupermercadojesusguiraomelero.pdf
+            target=_blank><input type="submit" id="botonimagenes" class="botonMenu" value="Ir a documentacion"></a></li>
+        <li><a><input type="submit" class="botonMenu" id="botonguardar" value="Guardar Estado"></a></li>
+        <li><a><input type="submit" id="botonvisible" class="botonMenu" onclick="ocultarfondo()"
+              value="Ocultar Fondo"></a></li>
+        <li><a><input type="submit" id="botonnoche" class="botonMenu" onclick="oscuridad.hacernoche()"
+              value="Modo Noche"></a></li>
+        <li><a><input type="submit" id="botondia" class="botonMenu" onclick="oscuridad.hacerdia()" value="Modo Dia"></a>
+        </li>
+
+        <li><a href=https://jesusguirao.github.io/Web-Supermercado/qr.pdf target=_blank><input type="submit"
+              id="botonimagenes" class="botonMenu" value="QR"></a></li>
+
+      </ul>
+    </div>
+  </nav>
 
 
   <div id="zonacajas"></div>
 
 
 
+  <center>
+    <div class="container">
+      <div><input type="text" id="regex" placeholder="cajaXXX: [+,-]XXX" value="caja1: +1" /></div>
+    </div>
+  </center>
+  <br>
+  <br>
+  <br>
+  <br>
+
+
+
 
   <script src="index.js"></script>
+
+  <script src="navegador.js"></script>
   <script src="Clasenoche.js"></script>
 
+  <footer class="piepagina">
+    <div class="sm">
+      <br>
+      Copyright ,Jesús Guirao 2021
+    </div>
+  </footer>
 
 </body>
 

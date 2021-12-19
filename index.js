@@ -148,7 +148,7 @@ const clickDerecho = (numeroCaja) => {
   gestorCola(false, caja, 1);
 };
 
-const crearCajas = (cajasLocalStorage, cantidad = 5) => {
+const crearCajas = (cajasLocalStorage, cantidad = 4) => {
   const zonaCajas = document.getElementById('zonacajas');
 
   for (let index = 0; index < cantidad; index++) {
@@ -245,13 +245,13 @@ document.getElementById('botonguardar').addEventListener('click', (e) => {
 });
 
 //Modo noche
-let noche = document.querySelector('#fondoid'); // cambiar atributos HTML / CSS
+let noche = document.querySelector('body'); // cambiar atributos HTML / CSS
 var style_noche = window.getComputedStyle(noche); // obtener atributos CSS
 var rutaImagenFondoOriginal = style_noche.getPropertyValue('background-image');
 
 //ocultar fondo
 function ocultarfondo() {
-  let ocultar = document.getElementById('fondoid'); // cambiar atributos HTML / CSS
+  let ocultar = document.getElementById('body'); // cambiar atributos HTML / CSS
 
   var style_ocultar = window.getComputedStyle(ocultar); // obtener atributos CSS
 
@@ -261,7 +261,7 @@ function ocultarfondo() {
     style_ocultar.getPropertyValue('background-image') ==
     rutaImagenFondoOriginal
   ) {
-    let ocultar = document.getElementById('fondoid'); // cambiar atributos HTML / CSS
+    let ocultar = document.getElementById('body'); // cambiar atributos HTML / CSS
     ocultar.style.backgroundImage = 'url(./imagenes/fonditoblanco.jpg)';
   } else {
     ocultar.style.backgroundImage = 'url(./imagenes/fondowebbien.jpg)';
